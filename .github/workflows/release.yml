@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Pack
+      run: dotnet pack -c Release -p:Version=${{ github.event.release.tag_name }} src/
+    - name: Archive Package
+      uses: actions/upload-artifact@v1
+      with:
+        name: SanValidatingIssuerNameRegistry
+        path: ./src/bin/Release/SanValidatingIssuerNameRegistry.${{ github.event.release.tag_name }}.nupkg
+    - name: Deploy to Nuget
+      run: dotnet nuget push ./src/bin/Release/SanValidatingIssuerNameRegistry.${{ github.event.release.tag_name }}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
