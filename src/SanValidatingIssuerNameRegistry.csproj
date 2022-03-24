@@ -3,11 +3,20 @@
   <PropertyGroup>
     <TargetFrameworks>net45;net461;net472;net48</TargetFrameworks>
     <LangVersion>10.0</LangVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Authors>TheJayMann</Authors>
+    <Description>A WIF IssuerNameRegistry which validates the signing certificate by using the Subject Alternative Name</Description>
+    <PackageProjectUrl>https://github.com/TheJayMann/SanValidatingIssuerNameRegistry</PackageProjectUrl>
+    <PackageTags>WIF SAN WS-Federation Certificate DNS IssuerNameRegistry</PackageTags>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="System.Configuration" />
     <Reference Include="System.IdentityModel" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
